@@ -1,0 +1,27 @@
+{% load static %}
+<header>
+    <form style="margin-bottom:5px;" action="/users"><input placeholder="Name" id='name' type="text" name="name"><input placeholder="Last Name" id='lastname' type="text" name="secondName"><button id='send'">Registration</button></form><a href="http://127.0.0.1:8000/list">Скачать PDF</a>
+</header>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Имя</th>
+            <th>Фамилия</th>
+            <th>Дата добавления</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for i in users %}
+            <tr>
+                <td>{{ i.name }}</td>
+                <td>{{ i.secondName }}</td>
+                <td>{{ i.date }}</td>
+            </tr>
+            {% endfor %}
+    </tbody>
+</table>
+
+<script src="{% static 'scripts.js'%}"></script>.
+<link rel="stylesheet" href="{% static 'stylesheet.css'%}" type="text/css">
+
+</style>
