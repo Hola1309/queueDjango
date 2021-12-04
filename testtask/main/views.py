@@ -8,14 +8,6 @@ from fpdf import FPDF
 
 def index(request):
     users = Users.objects.values()
-    data = users
-    pdf = FPDF()
-    pdf.add_page()
-    pdf.set_font("Arial", size=12)
-    for row in data:
-        txt = row['name'] + '   ' + row['secondName'] + '   ' + row['date'].strftime("%H:%M:%S - %b %d %Y")
-        pdf.cell(200, 10, txt=txt, ln=1,)
-    pdf.output("media/queue.pdf")
     return render(request, 'main/person.html', {'users': users})
 
 def users(request):
@@ -35,7 +27,15 @@ def users(request):
     return HttpResponse('Registration complete')
     
 def list(request):
-
+    users = Users.objects.values()
+    data = users
+    pdf = FPDF()    
+    pdf.add_page()
+    pdf.set_font("Arial", size=12)
+    for row in data:
+        txt = row['name'] + '   ' + row['secondName'] + '   ' + row['date'].strftime("%H:%M:%S - %b %d %Y")
+        pdf.cell(200, 10, txt=txt, ln=1,)
+    pdf.output("media/queue.pdf")
     the_file = 'media/queue.pdf'
     filename = os.path.basename(the_file)
     chunk_size = 8192
